@@ -524,14 +524,13 @@
             gap: isMobile ? 8 : 14,
             touchAction: 'none',
           }}>
-            {/* 좌측: 정리 안 된 카드 */}
+            {/* 좌측: 정리 안 된 카드 — 세로 1열 큰 카드 (이미지 + 이름) */}
             <div style={{ background: '#eef2ff', borderRadius: 16, padding: isMobile ? 6 : 10 }}>
               <div style={{ fontSize: isMobile ? '0.78em' : '0.9em', fontWeight: 800, color: '#475569', textAlign: 'center', marginBottom: 6 }}>
                 정리 안 된 카드
               </div>
               <div ref={poolRef} style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
+                display: 'flex', flexDirection: 'column',
                 gap: isMobile ? 5 : 8,
                 minHeight: 220,
               }}>
@@ -539,15 +538,17 @@
                   <div key={card.id} data-id={card.id}
                     onClick={() => !checked && tapToSpeak(card)}
                     style={{
-                      background: 'white', borderRadius: 12, padding: isMobile ? 4 : 6, textAlign: 'center',
+                      background: 'white', borderRadius: 12, padding: isMobile ? 5 : 7,
                       cursor: checked ? 'default' : 'grab', userSelect: 'none',
                       boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+                      display: 'flex', alignItems: 'center', gap: isMobile ? 6 : 10,
                     }}>
                     <img src={card.img} alt={card.ko} draggable={false} style={{
-                      width: '100%', aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
-                      borderRadius: 8, pointerEvents: 'none',
+                      width: isMobile ? 72 : 96, height: isMobile ? 72 : 96,
+                      aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
+                      borderRadius: 10, pointerEvents: 'none', flexShrink: 0,
                     }} />
-                    <div style={{ fontSize: isMobile ? '0.95em' : '1.15em', fontWeight: 900, marginTop: 2, color: '#1f2937', lineHeight: 1.1 }}>
+                    <div style={{ fontSize: isMobile ? '1.2em' : '1.5em', fontWeight: 900, color: '#1f2937', lineHeight: 1.15 }}>
                       {card.ko}
                     </div>
                   </div>
@@ -567,18 +568,18 @@
                       background: isOk ? '#d1fae5' : isWrong ? '#fee2e2' : '#fff',
                       border: '3px solid ' + (isOk ? '#10b981' : isWrong ? '#ef4444' : '#cbd5e1'),
                       borderRadius: 14,
-                      padding: isMobile ? 4 : 6,
-                      display: 'flex', alignItems: 'center', gap: isMobile ? 4 : 8,
-                      minHeight: isMobile ? 64 : 86,
+                      padding: isMobile ? 5 : 7,
+                      display: 'flex', alignItems: 'center', gap: isMobile ? 6 : 10,
+                      minHeight: isMobile ? 90 : 116,
                     }}>
                       <div style={{
-                        fontSize: isMobile ? '1em' : '1.4em', fontWeight: 900,
+                        fontSize: isMobile ? '1.2em' : '1.6em', fontWeight: 900,
                         color: isOk ? '#065f46' : isWrong ? '#991b1b' : '#64748b',
-                        minWidth: isMobile ? 24 : 36, textAlign: 'center',
+                        minWidth: isMobile ? 28 : 40, textAlign: 'center',
                       }}>{i + 1}</div>
                       <div ref={el => slotRefs.current[i] = el} style={{
                         flex: 1,
-                        minHeight: isMobile ? 56 : 76,
+                        minHeight: isMobile ? 76 : 100,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         border: card ? 'none' : '2px dashed #cbd5e1',
                         borderRadius: 10,
@@ -589,15 +590,15 @@
                             onClick={() => !checked && tapToSpeak(card)}
                             style={{
                               width: '100%', cursor: checked ? 'default' : 'grab', userSelect: 'none',
-                              display: 'flex', alignItems: 'center', gap: 6,
+                              display: 'flex', alignItems: 'center', gap: isMobile ? 6 : 10,
                               padding: '2px 4px',
                             }}>
                             <img src={card.img} alt={card.ko} draggable={false} style={{
-                              width: isMobile ? 48 : 64, height: isMobile ? 48 : 64,
+                              width: isMobile ? 72 : 96, height: isMobile ? 72 : 96,
                               aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
-                              borderRadius: 8, pointerEvents: 'none', flexShrink: 0,
+                              borderRadius: 10, pointerEvents: 'none', flexShrink: 0,
                             }} />
-                            <div style={{ fontWeight: 900, fontSize: isMobile ? '1em' : '1.3em', color: '#1f2937' }}>
+                            <div style={{ fontWeight: 900, fontSize: isMobile ? '1.2em' : '1.5em', color: '#1f2937' }}>
                               {card.ko}
                             </div>
                           </div>
