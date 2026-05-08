@@ -362,6 +362,18 @@
         setChecked(false);
       }
 
+      // 슬롯의 카드를 풀로 돌려보내기
+      function returnCardToPool(slotIdx) {
+        if (checked) return;
+        const card = order[slotIdx];
+        if (!card) return;
+        sfx.tap();
+        const newOrder = [...order];
+        newOrder[slotIdx] = null;
+        setOrder(newOrder);
+        setPoolOrder([...poolOrder, card]);
+      }
+
       function useHint() {
         if (checked) return;
         sfx.click();
@@ -607,6 +619,7 @@
                               width: '100%', cursor: checked ? 'default' : 'grab', userSelect: 'none',
                               display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 14,
                               padding: '2px 4px',
+                              position: 'relative',
                             }}>
                             <img src={card.img} alt={card.ko} draggable={false} style={{
                               width: isMobile ? 200 : 384, height: isMobile ? 200 : 384,
@@ -616,6 +629,26 @@
                             <div style={{ fontWeight: 900, fontSize: isMobile ? '1.2em' : '1.9em', color: '#1f2937' }}>
                               {card.ko}
                             </div>
+                            {!checked && (
+                              <button
+                                onClick={(e) => { e.stopPropagation(); returnCardToPool(i); }}
+                                onPointerDown={(e) => e.stopPropagation()}
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onTouchStart={(e) => e.stopPropagation()}
+                                style={{
+                                  position: 'absolute', top: 4, right: 4,
+                                  width: isMobile ? 32 : 40, height: isMobile ? 32 : 40,
+                                  borderRadius: '50%',
+                                  background: '#ef4444', color: 'white', border: 'none',
+                                  fontSize: isMobile ? '1em' : '1.2em', fontWeight: 900,
+                                  cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                  zIndex: 5,
+                                }}
+                                aria-label="카드 빼기"
+                                title="왼쪽으로 빼기"
+                              >↩</button>
+                            )}
                           </div>
                         )}
                       </div>
