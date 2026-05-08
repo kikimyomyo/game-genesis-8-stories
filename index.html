@@ -271,6 +271,10 @@
             delayOnTouchOnly: true,
             ghostClass: 'son-ghost',
             chosenClass: 'son-chosen',
+            scroll: true,             // 드래그 중 페이지 자동 스크롤
+            scrollSensitivity: 80,    // viewport 가장자리 80px 안에서 auto-scroll
+            scrollSpeed: 14,          // 모바일에서 충분히 빠르게
+            bubbleScroll: true,       // 부모 스크롤 컨테이너까지 전파
             onChoose: () => sfx.tap(),
             onEnd: handleEnd,
           }));
@@ -287,6 +291,10 @@
             delayOnTouchOnly: true,
             ghostClass: 'son-ghost',
             chosenClass: 'son-chosen',
+            scroll: true,             // 드래그 중 페이지 자동 스크롤
+            scrollSensitivity: 80,    // viewport 가장자리 80px 안에서 auto-scroll
+            scrollSpeed: 14,          // 모바일에서 충분히 빠르게
+            bubbleScroll: true,       // 부모 스크롤 컨테이너까지 전파
             onChoose: () => sfx.tap(),
             onEnd: handleEnd,
           }));
@@ -445,7 +453,7 @@
                 onClick={() => { sfx.tap(); try { window.speechSynthesis.cancel(); } catch(e){}; window.GameTTS.speakQueue([{ text: s.ko, lang: 'ko-KR' }, { text: s.description || s.subtitle, lang: 'ko-KR' }]); }}>
                   <div style={{ fontSize: isMobile ? '1em' : '1.3em', color: '#64748b', fontWeight: 800, minWidth: isMobile ? 32 : 44, textAlign: 'center' }}>{i + 1}번</div>
                   <img src={s.img} alt={s.ko} draggable={false} style={{
-                    width: isMobile ? 288 : 384, height: isMobile ? 288 : 384,
+                    width: isMobile ? 200 : 384, height: isMobile ? 200 : 384,
                     aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
                     borderRadius: 10, pointerEvents: 'none', flexShrink: 0,
                   }} />
@@ -551,11 +559,11 @@
                       display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 14,
                     }}>
                     <img src={card.img} alt={card.ko} draggable={false} style={{
-                      width: isMobile ? 288 : 384, height: isMobile ? 288 : 384,
+                      width: isMobile ? 200 : 384, height: isMobile ? 200 : 384,
                       aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
                       borderRadius: 10, pointerEvents: 'none', flexShrink: 0,
                     }} />
-                    <div style={{ fontSize: isMobile ? '1.5em' : '1.9em', fontWeight: 900, color: '#1f2937', lineHeight: 1.15 }}>
+                    <div style={{ fontSize: isMobile ? '1.2em' : '1.9em', fontWeight: 900, color: '#1f2937', lineHeight: 1.15 }}>
                       {card.ko}
                     </div>
                   </div>
@@ -577,7 +585,7 @@
                       borderRadius: 14,
                       padding: isMobile ? 6 : 8,
                       display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 14,
-                      minHeight: isMobile ? 304 : 400,
+                      minHeight: isMobile ? 220 : 400,
                     }}>
                       <div style={{
                         fontSize: isMobile ? '1.5em' : '2em', fontWeight: 900,
@@ -586,7 +594,7 @@
                       }}>{i + 1}</div>
                       <div ref={el => slotRefs.current[i] = el} style={{
                         flex: 1,
-                        minHeight: isMobile ? 292 : 388,
+                        minHeight: isMobile ? 208 : 388,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         border: card ? 'none' : '2px dashed #cbd5e1',
                         borderRadius: 10,
@@ -601,11 +609,11 @@
                               padding: '2px 4px',
                             }}>
                             <img src={card.img} alt={card.ko} draggable={false} style={{
-                              width: isMobile ? 288 : 384, height: isMobile ? 288 : 384,
+                              width: isMobile ? 200 : 384, height: isMobile ? 200 : 384,
                               aspectRatio: '1/1', objectFit: 'contain', background: '#fff',
                               borderRadius: 10, pointerEvents: 'none', flexShrink: 0,
                             }} />
-                            <div style={{ fontWeight: 900, fontSize: isMobile ? '1.5em' : '1.9em', color: '#1f2937' }}>
+                            <div style={{ fontWeight: 900, fontSize: isMobile ? '1.2em' : '1.9em', color: '#1f2937' }}>
                               {card.ko}
                             </div>
                           </div>
